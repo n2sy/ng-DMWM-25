@@ -1,0 +1,16 @@
+<p>Je m'appelle {{ prenom }} et j'ai {{  age }} ans</p>
+
+
+<div [hidden]="hd" [style.backgroundColor]="myColor">
+    Exemple de Property Bindng
+</div>
+
+<button (click)="clickHandler()" class="btn btn-primary">Click me</button>
+
+<input [(ngModel)]="prenom" type="text" class="form-control">
+<input #inp [value]="prenom" (input)="changePrenom(inp.value)"  type="text" class="form-control">
+
+
+
+<app-second [cl]="myColor" (eventToParent)="traitementDuParent($event)"></app-second>
+ <hr>
