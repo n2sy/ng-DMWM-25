@@ -3,6 +3,12 @@
         <app-liste (eventToCv)="recupererCandidatClique($event)" [allCandidates]="tabCandidats"></app-liste>
     </div>
     <div class="col-md-7">
-        <app-details [selCandidat]="selectedCandidat"></app-details>
+        @if (selectedCandidat) {
+            <app-details [selCandidat]="selectedCandidat"></app-details>
+            
+        }
+        @else {
+            <h3>Veuillez sélectionner un candidat...</h3>
+        }
     </div>
 </div>

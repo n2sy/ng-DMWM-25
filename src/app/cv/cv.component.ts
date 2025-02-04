@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ListeComponent } from "../liste/liste.component";
 import { DetailsComponent } from '../details/details.component';
 import { Candidat } from '../models/candidat';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cv',
@@ -13,7 +14,7 @@ export class CvComponent {
     tabCandidats : Candidat[] = [
         new Candidat('1', "bart", "simpson", 23, "ingénieur", "bart.jpeg"),
         new Candidat('2', "homer", "simpson", 52, "directeur", "homer.png"),
-        new Candidat('3', "lisa", "simpson", 28, "designer", "lisa.png")
+        new Candidat('3', "lisa", "simpson", 28, "designer", "lisa.png"),
     ];
     selectedCandidat : Candidat;
     
