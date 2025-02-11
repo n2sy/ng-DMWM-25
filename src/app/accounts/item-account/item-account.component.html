@@ -1,1 +1,14 @@
-<p>{{oneAccount.name }} {{ oneAccount.status }} </p>
+
+<div class="contour">
+    <h3>{{oneAccount.name }}</h3>
+    <hr>
+    <p>This account is {{ oneAccount.status }}</p>
+    
+
+        <button [disabled]="oneAccount.status == 'active'" (click)="changeStatus('active')" class="btn btn-success">Set to active</button>
+        
+  
+    <button [disabled]="oneAccount.status == 'inactive'" (click)="changeStatus('inactive')" class="btn btn-danger">Set to inactive</button>
+    <button [disabled]="oneAccount.status == 'unknown'" (click)="changeStatus('unknown')" class="btn btn-info">Set to unknown</button>
+</div>
+

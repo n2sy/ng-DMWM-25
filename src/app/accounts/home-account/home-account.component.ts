@@ -12,11 +12,14 @@ export class HomeAccountComponent {
     tabAccounts = [
         {
             name : "Nadim Account",
-            status : 'Active'
+            status : 'active'
         },
         {
             name : "Abdurrahim Account",
-            status : 'Inctive'
+            status : 'inactive'
         }
-    ]
+    ];
+    addNewAccount(newAcc) {
+        this.tabAccounts.push(newAcc);
+    }
 }
