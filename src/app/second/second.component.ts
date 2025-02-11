@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class SecondComponent {
  @Input({required : true}) cl = "yellow";
  @Output() eventToParent = new EventEmitter(); // enveloppe
+ name;
  
  sendEvent() { // On va déposer l'enveloppe à la poste
     this.eventToParent.emit("Lettre de la part de vote enfant");
