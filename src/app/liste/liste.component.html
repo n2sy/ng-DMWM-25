@@ -1,7 +1,6 @@
 <ol class="list-group">
     @for (cand of allCandidates; track $index) 
     {
-        {{ $index }}
         <app-item (sendCandToListe)="emitToCv($event)" [oneCandidate]="cand"></app-item>
 
     }

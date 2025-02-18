@@ -10,7 +10,7 @@ import { ManageServersComponent } from "./manage-servers/manage-servers.componen
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [FirstComponent, SecondComponent, CvComponent, HomeAccountComponent, MsWordComponent, ManageServersComponent]
+  imports: [ CvComponent, ManageServersComponent]
 })
 export class AppComponent {
   title = 'DMWM-A-25';

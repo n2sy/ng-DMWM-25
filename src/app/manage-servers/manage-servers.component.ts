@@ -1,9 +1,9 @@
-import { NgClass } from '@angular/common';
+import { DatePipe, NgClass, UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-manage-servers',
-  imports: [NgClass],
+  imports: [NgClass, UpperCasePipe, DatePipe],
   templateUrl: './manage-servers.component.html',
   styleUrl: './manage-servers.component.css'
 })
@@ -20,14 +20,14 @@ export class ManageServersComponent {
             name : "Production Test Server",
             type: "medium",
             date_d : new Date(2020, 4, 4),
-            status : 'critical'
+            status : 'offline'
             
         },
         {
             name : "Development Server",
             type: "large",
             date_d : new Date(2020, 4, 4),
-            status : 'critical'
+            status : 'stable'
             
         },
         {

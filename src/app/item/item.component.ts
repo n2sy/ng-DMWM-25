@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import type { Candidat } from '../models/candidat';
+import { CustomDirDirective } from '../custom-dir.directive';
 
 @Component({
   selector: 'app-item',
-  imports: [],
+  imports: [CustomDirDirective],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
 })
