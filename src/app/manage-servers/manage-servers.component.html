@@ -2,7 +2,7 @@
     @for (server of listServers; track $index) {
         
         <li [ngClass]="affecterClasse(server.status)" class="list-group-item">
-            {{ server.name }} | {{ server.type | uppercase }} | {{ server.date_d | date:'fullDate' | uppercase }}
+            {{ server.name | short:16 }} | {{ server.type | uppercase }} | {{ server.date_d | date:'fullDate' | uppercase }}
             <span class="badge text-bg-secondary">{{ server.status }} </span>
         </li>
     }
