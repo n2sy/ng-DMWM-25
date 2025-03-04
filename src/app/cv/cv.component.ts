@@ -6,13 +6,14 @@ import { CommonModule } from '@angular/common';
 import { FirstService } from '../services/first.service';
 import { GestionCandidatsService } from '../services/gestion-candidats.service';
 import { RecruterComponent } from "../recruter/recruter.component";
+import { GestionRecruesService } from '../services/gestion-recrues.service';
 
 @Component({
   selector: 'app-cv',
   imports: [ListeComponent, DetailsComponent, RecruterComponent],
   templateUrl: './cv.component.html',
   styleUrl: './cv.component.css',
-  providers : [FirstService]
+  providers : [FirstService, GestionRecruesService]
 })
 export class CvComponent {
     tabCandidats : Candidat[] = [];
