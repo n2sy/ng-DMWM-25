@@ -1,27 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ListeComponent } from "../liste/liste.component";
 import { DetailsComponent } from '../details/details.component';
 import { Candidat } from '../models/candidat';
 import { CommonModule } from '@angular/common';
+import { FirstService } from '../services/first.service';
+import { GestionCandidatsService } from '../services/gestion-candidats.service';
+import { RecruterComponent } from "../recruter/recruter.component";
 
 @Component({
   selector: 'app-cv',
-  imports: [ListeComponent, DetailsComponent],
+  imports: [ListeComponent, DetailsComponent, RecruterComponent],
   templateUrl: './cv.component.html',
-  styleUrl: './cv.component.css'
+  styleUrl: './cv.component.css',
+  providers : [FirstService]
 })
 export class CvComponent {
-    tabCandidats : Candidat[] = [
-        new Candidat('1', "bart", "simpson", 23, "ingénieur", "bart.jpeg"),
-        new Candidat('2', "homer", "simpson", 52, "directeur", "homer.png"),
-        new Candidat('3', "lisa", "simpson", 28, "designer", "lisa.png"),
-        new Candidat('4', "nidhal", "jelassi", 78, "designer"),
-    ];
+    tabCandidats : Candidat[] = [];
     selectedCandidat : Candidat;
     
     recupererCandidatClique(cand) {
         this.selectedCandidat = cand;
         console.log(this.selectedCandidat);
+    }
+    
+    //1ere methode injection de dependances
+    constructor(private candService : GestionCandidatsService, private firstSer : FirstService) {
+        
+    }
+    
+    //2eme methode injection de dependances
+    // private firstSer = inject(FirstService)
+    
+    
+    
+    ngOnInit() {
+        this.tabCandidats = this.candService.getAllCandidats();
+        this.firstSer.showInfos();
+        
+    }
+    
+    addNewCandidat() {
+        this.candService.addCandidat();
+    }
+    
+    showCandidats() {
+        console.log(this.candService.getAllCandidats());
+        
     }
 
 }
