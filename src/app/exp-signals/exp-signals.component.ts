@@ -30,6 +30,7 @@ export class ExpSignalsComponent {
   increment() {
     this.counter.set(this.counter() * 10)
     this.counter.update((previousValue) => previousValue + 1 );
+    this.counter.set(this.counter() + 1 );
     //console.log(this.counter());
     
     const count = signal(0);

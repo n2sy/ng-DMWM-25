@@ -1,1 +1,25 @@
-<p>add-product works!</p>
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+        <td>
+            <input #pName type="text" class="form-control" placeholder="Product Name...">
+        </td>
+        <td>
+            <input #pPrice type="text" class="form-control" placeholder="Product Price...">
+        </td>
+        <td>
+            <input #pSelected type="checkbox">
+        </td>
+        <td>
+            <button (click)="productSer.addProduct(
+                {
+                    name : pName.value,
+                    price : pPrice.value,
+                    isSelected: pSelected.checked
+                }
+            )" class="btn btn-success">Save</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

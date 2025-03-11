@@ -3,17 +3,17 @@ import { ListeComponent } from "../liste/liste.component";
 import { DetailsComponent } from '../details/details.component';
 import { Candidat } from '../models/candidat';
 import { CommonModule } from '@angular/common';
-import { FirstService } from '../services/first.service';
-import { GestionCandidatsService } from '../services/gestion-candidats.service';
 import { RecruterComponent } from "../recruter/recruter.component";
 import { GestionRecruesService } from '../services/gestion-recrues.service';
+import { FirstService } from '../services/first.service';
+import { GestionCandidatsService } from '../services/gestion-candidats.service';
 
 @Component({
   selector: 'app-cv',
   imports: [ListeComponent, DetailsComponent, RecruterComponent],
   templateUrl: './cv.component.html',
   styleUrl: './cv.component.css',
-  providers : [FirstService, GestionRecruesService]
+  providers : [GestionRecruesService]
 })
 export class CvComponent {
     tabCandidats : Candidat[] = [];
