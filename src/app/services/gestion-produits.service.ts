@@ -21,14 +21,17 @@ export class GestionProduitsService {
   
   updateProduct(idProduit) {
     let i = this.allProducts().findIndex(p => p.id == idProduit);
-    // this.allProducts.update((previous) => {
-    //     previous[i].isSelected = !previous[i].isSelected;
-    //     return previous;
-    // })
+    this.allProducts.update((previous) => {
+        previous[i].isSelected = !previous[i].isSelected;
+        
+        return [...previous];
+    })
     
     //Version de Iheb
-    this.allProducts()[i].isSelected = !this.allProducts()[i].isSelected;
-    this.allProducts.set(this.allProducts())
+    // this.allProducts()[i].isSelected = !this.allProducts()[i].isSelected;
+    // this.allProducts.set(this.allProducts())
+    
+ 
   }
   
   deleteProduct(idProduit) {
