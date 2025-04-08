@@ -24,7 +24,7 @@ export class GestionProduitsService {
     this.allProducts.update((previous) => {
         previous[i].isSelected = !previous[i].isSelected;
         
-        return [...previous];
+        return [...previous]; //new Array(previous)
     })
     
     //Version de Iheb

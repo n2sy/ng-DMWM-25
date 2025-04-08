@@ -8,12 +8,13 @@ import { ManageServersComponent } from "./manage-servers/manage-servers.componen
 import { ExpSignalsComponent } from "./exp-signals/exp-signals.component";
 import { HomeProductsComponent } from "./products/home-products/home-products.component";
 import { RecruterComponent } from "./recruter/recruter.component";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [CvComponent, ManageServersComponent, ExpSignalsComponent, HomeProductsComponent, RecruterComponent],
+  imports: [CvComponent, ManageServersComponent, ExpSignalsComponent, HomeProductsComponent, RecruterComponent, HomeAccountComponent, RouterOutlet],
 })
 export class AppComponent {
   title = 'DMWM-A-25';
