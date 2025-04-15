@@ -9,7 +9,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 export const myRoutes: Routes = [
     {path : '', component: AccueilComponent },
-    {path : 'cv', component: CvComponent },
+    // {path : 'cv', component: CvComponent },
+    {path : 'cv', loadComponent : () => import("./cv/cv.component").then(c => c.CvComponent) },
     {path : 'cv/add', component: AddComponent },
     {path : 'cv/:id', component: InfosComponent },
     {path : 'accounts', component: HomeAccountComponent },

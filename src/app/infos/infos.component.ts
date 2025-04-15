@@ -14,7 +14,7 @@ export class InfosComponent {
     ngOnInit() {
         //1ere manière
         // console.log(this.activatedRoute.snapshot.params);
-        this.selectedId = this.activatedRoute.snapshot.paramMap.get('id');
+       // this.selectedId = this.activatedRoute.snapshot.paramMap.get('id');
         
         //2eme manière
         this.activatedRoute.paramMap.subscribe(
