@@ -13,6 +13,10 @@ export class GestionCandidatsService {
         
     ];
     
+    getCandidatById(id) {
+        return this.allCandidats.find((c) => c.id == id)
+    }
+    
     getAllCandidats() {
         return this.allCandidats;
     }

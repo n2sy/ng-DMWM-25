@@ -7,10 +7,11 @@ import { RecruterComponent } from "../recruter/recruter.component";
 import { GestionRecruesService } from '../services/gestion-recrues.service';
 import { FirstService } from '../services/first.service';
 import { GestionCandidatsService } from '../services/gestion-candidats.service';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-cv',
-  imports: [ListeComponent, DetailsComponent, RecruterComponent],
+  imports: [ListeComponent, DetailsComponent, RecruterComponent, RouterOutlet],
   templateUrl: './cv.component.html',
   styleUrl: './cv.component.css',
   providers : [GestionRecruesService]
