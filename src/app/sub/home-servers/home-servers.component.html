@@ -2,7 +2,7 @@
     <div class="col-4">
         <ol class="list-group">
             @for (serv of tabServers; track $index) {
-                <li routerLink="" class="list-group-item">{{ serv.name }} </li>
+                <li [queryParams]="{allowEdit : serv.id == 3 ? 1 : 0}" [routerLink]="[serv.id]" class="list-group-item">{{ serv.name }} </li>
             }
         </ol>
     </div>

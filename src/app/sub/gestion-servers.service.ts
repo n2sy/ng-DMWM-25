@@ -20,7 +20,11 @@ export class GestionServersService {
             name : "Emmanuel Server",
             status : "offline"
         }
-    ]
+    ];
+    
+    getServerById(id) {
+       return this.allServers.find(s => s.id == id);
+    }
 
   constructor() { }
 }
