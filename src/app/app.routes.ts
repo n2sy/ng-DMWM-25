@@ -7,6 +7,7 @@ import { InfosComponent } from './infos/infos.component';
 import { AddComponent } from './add/add.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditerComponent } from './editer/editer.component';
+import { LoginComponent } from './login/login.component';
 
 export const myRoutes: Routes = [
     
@@ -41,6 +42,7 @@ export const myRoutes: Routes = [
         
     ]},
     {path : 'accounts',  component : HomeAccountComponent },
+    {path : 'login',  component : LoginComponent },
     {path : 'servers',  loadChildren : () => import('./sub/sub.module').then(m => m.SubModule) },
     // {path : 'accounts', redirectTo : '/products', pathMatch : 'full' },
     {path : 'products', component: HomeProductsComponent },

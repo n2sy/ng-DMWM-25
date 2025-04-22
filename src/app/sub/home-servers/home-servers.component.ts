@@ -14,5 +14,9 @@ export class HomeServersComponent  {
     ngOnInit() {     
        this.tabServers = this.serverService.allServers; 
     }
+    
+    chargerQueryValue() {
+       
+    }
 
 }
