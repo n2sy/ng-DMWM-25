@@ -1,1 +1,12 @@
-<p>home-servers works!</p>
+<div class="row">
+    <div class="col-4">
+        <ol class="list-group">
+            @for (serv of tabServers; track $index) {
+                <li routerLink="" class="list-group-item">{{ serv.name }} </li>
+            }
+        </ol>
+    </div>
+    <div class="col-6">
+        <router-outlet></router-outlet>
+    </div>
+</div>
