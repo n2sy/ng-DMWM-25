@@ -42,7 +42,7 @@ export class CvComponent {
     }
     
     addNewCandidat() {
-        this.candService.addCandidat();
+       // this.candService.addCandidat();
     }
     
     showCandidats() {
