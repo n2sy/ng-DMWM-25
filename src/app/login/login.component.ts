@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +15,18 @@ export class LoginComponent {
     submitHandler(f) {
         console.log(f);
         
+    }
+    reinitialiserForm(f : NgForm) {
+        f.form.reset();
+    }
+    
+    genererPwd(f : NgForm) {
+        f.form.patchValue(
+            {
+                "login": "",
+                "password": "azerty123",
+            }
+        )
     }
 
 }

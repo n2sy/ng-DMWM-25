@@ -12,23 +12,43 @@
         <div class="alert alert-danger">Le nombre minimal de caractères est 6</div>
     }
     
-    <label for="">Langage préféré</label>
-    <select name="langage"  [ngModel]="defaultLanguage" class="form-control">
-        <option value=""></option>
-        <option value="js">Javascript</option>
-        <option value="php">Php</option>
-        <option value="python">Python</option>
-    </select>
-    <hr>
-    {{ defaultLanguage}}
-    <hr>
+    <label for="">Gestion d'erreurs</label>
+    <input #exp="ngModel" type="text" ngModel name="errors" class="form-control" required minlength="5" pattern="nidhal">
     
-    <textarea [(ngModel)]="myComment" name="commentaire" cols="5" rows="4" class="form-control"></textarea>
-    <hr>
-    {{ myComment}}
-    <hr>
+    @if (exp.invalid) {
+        @if (exp.errors["required"]) {
+            <div class="alert alert-info">Ce champ est obligatoire</div>
+        }
+        @if (exp.errors["minlength"]) {
+            <div class="alert alert-info">Le nombre minimal de caractères est 5</div>
+        }
+        @if (exp.errors["pattern"]) {
+            <div class="alert alert-info">Le pattern est 'nidhal'</div>
+        }
+    }
     
-    <button (click)="submitHandler(f)" class="btn btn-primary">Se connecter</button>
+    
+    <div #divInfos="ngModelGroup" ngModelGroup="infos">
+        <label for="">Langage préféré</label>
+        <select name="langage"  [ngModel]="defaultLanguage" class="form-control">
+            <option value=""></option>
+            <option value="js">Javascript</option>
+            <option value="php">Php</option>
+            <option value="python">Python</option>
+        </select>
+        <hr>
+        {{ defaultLanguage}}
+        <hr>
+        
+        <textarea [(ngModel)]="myComment" name="commentaire" cols="5" rows="4" class="form-control"></textarea>
+        <hr>
+        {{ myComment}}
+        <hr>
+    </div>
+    
+    <button [disabled]="f.invalid" (click)="submitHandler(f)" class="btn btn-primary">Se connecter</button>
+    <button (click)="reinitialiserForm(f)" class="btn btn-danger">Reinitialiser</button>
+    <button (click)="genererPwd(f)" class="btn btn-info">Generer Mot de passe</button>
     
     <pre>
         {{ f.value | json }}
