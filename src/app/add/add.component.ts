@@ -12,9 +12,36 @@ import { Router } from '@angular/router';
 })
 export class AddComponent {
     private candSer = inject(GestionCandidatsService);
-    private router = inject(Router)
-  submitHandler(formValue) {
-    this.candSer.addCandidat(formValue);
-    this.router.navigateByUrl("/cv")
+    private router = inject(Router);
+    showError = false;
+  submitHandler(formValue, e) {
+    console.log(e.target[4].files[0]);
+    let formData = new FormData();
+    formData.append("avatar", e.target[4].files[0])
+    this.candSer.uploadAvatar(formData).subscribe(
+        {
+            next : (response) => {
+                formValue.avatar = response["fileName"];    
+                this.candSer.addCandidatAPI(formValue).subscribe(
+                    {
+                        next : (response) => {
+                            console.log(response);
+                            alert(response["message"]);
+                            this.router.navigateByUrl("/cv")
+                        },
+                        error : (err) => {
+                            alert("Probléme avec l'ajout d'un candidat")
+                        }
+                    }
+                )            
+                
+            },
+            error : (err) => {
+                this.showError = true;
+            }
+        }
+    )
+    
+    //this.router.navigateByUrl("/cv")
   }
 }

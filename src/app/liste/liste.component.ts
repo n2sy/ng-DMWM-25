@@ -21,7 +21,17 @@ export class ListeComponent {
    private candSer = inject(GestionCandidatsService);
    
    ngOnInit() {
-    this.allCandidates = this.candSer.getAllCandidats();
+    // this.allCandidates = this.candSer.getAllCandidats();
+     this.candSer.getAllCandidatsAPI().subscribe(
+        {
+            next : (response : Candidat[]) => {
+                this.allCandidates = response;
+            },
+            error : (err) => {
+                
+            }
+        }
+     )
    }
    
    showCandidats() {

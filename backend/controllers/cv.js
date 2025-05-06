@@ -3,25 +3,25 @@ const _ = require("lodash");
 const fs = require("fs");
 const path = require("path");
 
-exports.getAllPersons = async (req, res, next) => {
+exports.getAllcandidats = async (req, res, next) => {
   const filter = req.query.filter;
 
   try {
     const result = await Personne.find({
-      nom: new RegExp(filter, "i"),
+      nom: new RegExp(filter, "i"), // insesible à la casse
     });
     res.status(200).json(result);
   } catch (err) {
     next(err);
   }
 };
-exports.getPerson = (req, res, next) => {
+exports.getCandidat = (req, res, next) => {
   const pId = req.params.id;
 
   Personne.findById(pId)
     .then((p) => {
       if (!p) {
-        const error = new Error("Could not find this person");
+        const error = new Error("Could not find this candidate");
         error.statusCode = 404;
         next(error);
       }
@@ -31,23 +31,23 @@ exports.getPerson = (req, res, next) => {
       console.log(err);
     });
 };
-exports.createPerson = (req, res, next) => {
-  let newP = _.pick(req.body, ["prenom", "nom", "age", "profession", "avatar"]);
+exports.createCandidat = (req, res, next) => {
+  let newP = _.pick(req.body, ["prenom", "nom", "age", "profession"]);
+
+  if (req.body.avatar) {
+    const urlAvatar = req.protocol + "://" + req.get("host");
+    newP.avatar = urlAvatar + "/avatars/" + req.body.avatar;
+  }
+
+  newP.recrue = false;
+
   const newPerson = new Personne(newP);
 
-   if (req.body.avatar) {
-       const urlAvatar = req.protocol + "://" + req.get("host");
-       newPerson.avatar = urlAvatar + "/avatars/" + req.body.avatar;
-       //data: fs.readFileSync(path.join(process.cwd(), '/uploads/', req.body.avatar)),
-       //contentType: 'image/png'
-   }
-
-   console.log(newPerson);
   newPerson
     .save()
     .then((result) => {
       res.status(201).json({
-        message: "New Person created successfully",
+        message: "New applicant created successfully",
         id: result["_id"].toString(),
       });
     })
@@ -56,13 +56,13 @@ exports.createPerson = (req, res, next) => {
       next(err);
     });
 };
-exports.updatePerson = (req, res, next) => {
+exports.updateCandidat = (req, res, next) => {
   const pId = req.params["id"];
 
   Personne.findById(pId)
     .then((p) => {
       if (!p) {
-        const error = new Error("Could not find this person");
+        const error = new Error("Could not find this applicant");
         error.statusCode = 404;
         throw error;
       }
@@ -73,7 +73,7 @@ exports.updatePerson = (req, res, next) => {
     })
     .then((result) => {
       res.status(200).json({
-        message: "Person updated successfully",
+        message: "Applicant updated successfully",
         result: result,
       });
     })
@@ -81,9 +81,69 @@ exports.updatePerson = (req, res, next) => {
       next(err);
     });
 };
-exports.deletePerson = (req, res, next) => {
+exports.updateCandidat2 = (req, res, next) => {
+  let p = _.pick(req.body, ["prenom", "nom", "age", "profession", "avatar"]);
+  let newP = new Personne(p);
+  newP
+    .save()
+    .then((result) => {
+      res.status(200).json({
+        message: "Applicant updated successfully V2",
+        result: result,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+exports.recruterCandidat = (req, res, next) => {
   const pId = req.params["id"];
-  Personne.findByIdAndRemove(pId)
+
+  Personne.findById(pId)
+    .then((p) => {
+      if (!p) {
+        const error = new Error("Could not find this applicant");
+        error.statusCode = 404;
+        throw error;
+      }
+
+      p = _.merge(p, req.body);
+
+      return p.save();
+    })
+    .then((result) => {
+      if (result["recrue"] == true)
+        res.status(200).json({
+          message: "Applicant hired successfully",
+          result: result,
+        });
+      else
+        res.status(200).json({
+          message: "Applicant fired successfully",
+          result: result,
+        });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+exports.getAllrecrues = async (req, res, next) => {
+  const filter = req.query.filter;
+
+  try {
+    const result = await Personne.find({
+      recrue: true, // insesible à la casse
+    });
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+exports.deleteCandidat = (req, res, next) => {
+  const pId = req.params["id"];
+  console.log(pId);
+
+  Personne.findByIdAndDelete(pId)
     .then((p) => {
       console.log(p);
       if (!p) {
@@ -97,6 +157,8 @@ exports.deletePerson = (req, res, next) => {
       });
     })
     .catch((err) => {
+      console.log(err);
+
       next(err);
     });
 };

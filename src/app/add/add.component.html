@@ -1,4 +1,9 @@
-<form #f="ngForm" (ngSubmit)="submitHandler(f.value)">
+@if (showError) {
+    <div class="alert alert-info">Votre format de fichier est invalide...</div>
+    
+}
+
+<form #f="ngForm" (ngSubmit)="submitHandler(f.value, $event)">
     <label for="">Prénom</label>
     <input ngModel name="prenom" type="text" class="form-control">
     <label for="">Nom</label>
@@ -8,7 +13,7 @@
     <label for="">Profession</label>
     <input ngModel name="profession" type="text" class="form-control">
     <label for="">Avatar</label>
-    <input ngModel name="avatar" type="text" class="form-control">
+    <input name="avatar" type="file" class="form-control">
     
     <pre>
         {{ f.value | json}}

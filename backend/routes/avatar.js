@@ -15,13 +15,13 @@ const upload = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "./uploads");
+    cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
-    // cb(null, file.originalname);
-    const name = file.originalname.toLowerCase().split(" ").join("-");
+    const name =
+      file.originalname.toLowerCase().split(".")[0] + "-" + Date.now();
     const ext = MIME_TYPE_MAP[file.mimetype];
-    cb(null, name + "-" + Date.now() + "." + ext);
+    cb(null, name + "." + ext);
   },
 });
 

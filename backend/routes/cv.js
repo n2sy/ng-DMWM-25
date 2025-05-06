@@ -4,28 +4,37 @@ const router = express.Router();
 
 const isAuth = require("../middelware/is-auth");
 
-// récupérer la liste de toutes les personnes
-router.get('/persons', cvCtrl.getAllPersons);
+// récupérer la liste de tous les Candidats
+router.get("/candidats", cvCtrl.getAllcandidats);
 
-//récupérer les infos sur une SEULE personne
-router.get('/persons/:id', cvCtrl.getPerson);
+// récupérer la liste de toutes les recrues
+router.get("/recrues", cvCtrl.getAllrecrues);
 
-//création d'une nouvelle personne sans token
-router.post('/persons/free', cvCtrl.createPerson);
+//récupérer les infos sur un SEUL Candidat
+router.get("/candidats/:id", cvCtrl.getCandidat);
 
-//Update d'une personne sans token
-router.put('/persons/free/:id', cvCtrl.updatePerson);
+//création d'un nouveau Candidat sans token
+router.post("/candidats/free", cvCtrl.createCandidat);
 
-//suppression d'une personne sans token
-router.delete('/persons/free/:id', cvCtrl.deletePerson);
+//Update d'un Candidat sans token
+router.put("/candidats/free/:id", cvCtrl.updateCandidat);
 
-//création d'une nouvelle personne
-router.post('/persons', isAuth, cvCtrl.createPerson);
+//suppression d'un Candidat sans token
+router.delete("/candidats/free/:id", cvCtrl.deleteCandidat);
 
-//Update d'une personne
-router.put('/persons/:id', isAuth, cvCtrl.updatePerson);
+//création d'un nouveau Candidat
+router.post("/candidats", isAuth, cvCtrl.createCandidat);
 
-//suppression d'une personne
-router.delete('/persons/:id', isAuth, cvCtrl.deletePerson);
+//Update d'un Candidat
+router.put("/candidats/v2", cvCtrl.updateCandidat2);
+
+//Update d'un Candidat
+router.put("/candidats/:id", isAuth, cvCtrl.updateCandidat);
+
+//Recruter ou non un Candidat
+router.patch("/candidats/recruter/:id", cvCtrl.recruterCandidat);
+
+//suppression d'un Candidat
+router.delete("/candidats/:id", isAuth, cvCtrl.deleteCandidat);
 
 module.exports = router;
