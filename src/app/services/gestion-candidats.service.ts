@@ -59,12 +59,6 @@ export class GestionCandidatsService {
         
     }
     deleteCandidatAPI(idCand) {
-        let token = localStorage.getItem("access_token");
-        if(token) {
-            let h = new HttpHeaders();
-            h.append("Authorization", `bearer ${token}`)
-            return this.http.delete(`${this.link}/${idCand}`, {headers : h})
-        }
         return this.http.delete(`${this.link}/${idCand}`)
         
     }

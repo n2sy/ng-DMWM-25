@@ -8,6 +8,10 @@ import { AddComponent } from './add/add.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditerComponent } from './editer/editer.component';
 import { LoginComponent } from './login/login.component';
+import { blockGuard } from './guards/block.guard';
+import { allowGuard } from './guards/allow.guard';
+import { quitterLoginGuard } from './guards/quitter-login.guard';
+import { quitterFormGuard } from './guards/quitter-form.guard';
 
 export const myRoutes: Routes = [
     
@@ -33,16 +37,16 @@ export const myRoutes: Routes = [
     // {path : 'cv', loadComponent : () => import("./cv/cv.component").then(c => c.CvComponent) },
     {path : 'cv', children : [
         {path : '', component: CvComponent},
-        {path : 'add', component: AddComponent},
+        {path : 'add', component: AddComponent, canActivate : [blockGuard], canDeactivate : [quitterFormGuard]}, 
         {path : ':id', children : [
             {path : '', component: InfosComponent },
-            {path : 'edit', component: EditerComponent },
+            {path : 'edit', component: EditerComponent, canActivate : [blockGuard]},
             
         ] },
         
     ]},
     {path : 'accounts',  component : HomeAccountComponent },
-    {path : 'login',  component : LoginComponent },
+    {path : 'login',  component : LoginComponent, canActivate : [allowGuard], canDeactivate : [quitterLoginGuard] },
     {path : 'servers',  loadChildren : () => import('./sub/sub.module').then(m => m.SubModule) },
     // {path : 'accounts', redirectTo : '/products', pathMatch : 'full' },
     {path : 'products', component: HomeProductsComponent },

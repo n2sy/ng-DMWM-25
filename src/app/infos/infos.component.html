@@ -5,7 +5,7 @@
        <div class="tab-pane active" id="profile">
          
          <div class="d-flex justify-content-center">
-           <img width="150px" height="150px" class="rounded-circle align-content-center" [src]="selectedCand.avatar | noAvatar" alt="">
+           <img width="150px" height="150px" class="rounded-circle align-content-center" [src]="selectedCand?.avatar | noAvatar" alt="">
          </div>
          <div class="row">
            <div class="col-md-12">
@@ -14,26 +14,26 @@
                <tbody>
                <tr>
                  <td>
-                   <strong>Prénom</strong> {{ selectedCand.prenom }}
+                   <strong>Prénom</strong> {{ selectedCand?.prenom }}
                  </td>
                </tr>
                <tr>
                  <td>
-                   <strong>Nom</strong> {{ selectedCand.nom }}
+                   <strong>Nom</strong> {{ selectedCand?.nom }}
                  </td>
                </tr>
                <tr>
                  <td>
-                   <strong>Age</strong>{{ selectedCand.age }} ans
+                   <strong>Age</strong>{{ selectedCand?.age }} ans
                </tr>
                <tr>
                  <td>
-                   <strong>Profession</strong> {{ selectedCand.profession}}
+                   <strong>Profession</strong> {{ selectedCand?.profession}}
                  </td>
                </tr>
                <tr>
                  <td>
-                   <strong>Image</strong> {{ selectedCand.avatar }}
+                   <strong>Image</strong> {{ selectedCand?.avatar }}
                  </td>
                </tr>
                </tbody>

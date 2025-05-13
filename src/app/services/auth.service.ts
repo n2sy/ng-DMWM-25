@@ -16,10 +16,13 @@ export class AuthService {
         
     }
     seDeconnecter() {
-        
+        localStorage.removeItem("access_token")
     }
     estConnecte() {
-        
+        let token = localStorage.getItem("access_token");
+        if(token) 
+            return true;
+        return false
     }
 
   constructor() { }

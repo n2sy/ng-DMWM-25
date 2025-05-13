@@ -5,9 +5,12 @@
     <li class="nav-item">
       <a class="nav-link" routerLinkActive="active" routerLink="cv" [routerLinkActiveOptions]="{exact : true}"  >CV</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" routerLink="cv/add" >Add</a>
-    </li>
+    @if (authService.estConnecte()) {
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="cv/add" >Add Candidat</a>
+        </li>
+        
+    }
     <li class="nav-item">
       <a class="nav-link" routerLinkActive="active" routerLink="products" >Products</a>
     </li>
@@ -17,8 +20,16 @@
     <li class="nav-item">
       <a class="nav-link" routerLinkActive="active" routerLink="accounts" >Accounts</a>
     </li>
+    @if (!authService.estConnecte()) {
+
     <li class="nav-item">
       <a class="nav-link" routerLinkActive="active" routerLink="login" >Login</a>
     </li>
+}
+@else {
+    <li class="nav-item">
+        <a class="nav-link" (click)="authService.seDeconnecter()" >Logout</a>
+      </li>
+}
    
   </ul>

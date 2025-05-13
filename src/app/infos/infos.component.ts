@@ -19,16 +19,19 @@ export class InfosComponent {
     ngOnInit() {
         //1ere manière
         // console.log(this.activatedRoute.snapshot.params);
-        this.candSer.getCandidatByIdAPI(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
-            {
-                next : (response : Candidat) => {
-                    this.selectedCand = response;
-                },
-                error : (err) => {
-                    this.router.navigateByUrl("/not-found")
+        setTimeout(() => {
+            this.candSer.getCandidatByIdAPI(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
+                {
+                    next : (response : Candidat) => {
+                        this.selectedCand = response;
+                    },
+                    error : (err) => {
+                        this.router.navigateByUrl("/not-found")
+                    }
                 }
-            }
-        )
+            )
+            
+        }, 3000)
         
         //2eme manière
         // this.activatedRoute.paramMap.subscribe(
