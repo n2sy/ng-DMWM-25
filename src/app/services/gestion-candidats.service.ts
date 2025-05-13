@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Candidat } from '../models/candidat';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,11 @@ export class GestionCandidatsService {
     ];
     
     getCandidatById(id) {
-        return this.allCandidats.find((c) => c.id == id)
+        return this.allCandidats.find((c) => c._id == id)
+    }
+    
+    getCandidatByIdAPI(id) {
+        return this.http.get(`${this.link}/${id}`)
     }
     
     getAllCandidats() {
@@ -33,21 +37,35 @@ export class GestionCandidatsService {
     }
     
     addCandidat(newCandidat) {
-        newCandidat.id = this.allCandidats[this.allCandidats.length - 1].id + 1;
+        newCandidat.id = this.allCandidats[this.allCandidats.length - 1]._id + 1;
        this.allCandidats.push(newCandidat);
     }
     addCandidatAPI(newCandidat) {
-       return this.http.post(`${this.link}/free`, newCandidat)
+       return this.http.post(`${this.link}`, newCandidat)
     }
     
     updateCandidat(uCand) {
-       let i = this.allCandidats.findIndex(c => c.id == uCand.id);
+       let i = this.allCandidats.findIndex(c => c._id == uCand.id);
        this.allCandidats[i] = uCand
     }
     
+    updateCandidatAPI(uCand) {
+       return this.http.put(`${this.link}/${uCand._id}`, uCand)
+    }
+    
     deleteCandidat(idCand) {
-        let i = this.allCandidats.findIndex(c => c.id == idCand);
+        let i = this.allCandidats.findIndex(c => c._id == idCand);
         this.allCandidats.splice(i, 1)
+        
+    }
+    deleteCandidatAPI(idCand) {
+        let token = localStorage.getItem("access_token");
+        if(token) {
+            let h = new HttpHeaders();
+            h.append("Authorization", `bearer ${token}`)
+            return this.http.delete(`${this.link}/${idCand}`, {headers : h})
+        }
+        return this.http.delete(`${this.link}/${idCand}`)
         
     }
 

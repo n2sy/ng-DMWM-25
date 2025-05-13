@@ -5,7 +5,7 @@ export class Candidat {
 //    private prenom : string;
 //    nom : string; 
    
-   constructor(public id : string, public prenom : string, public nom : string, public age : number, public profession : string,
+   constructor(public _id : string, public prenom : string, public nom : string, public age : number, public profession : string,
     public avatar? : string
    ) {
     // this.id = id;

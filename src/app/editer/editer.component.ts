@@ -18,14 +18,29 @@ export class EditerComponent {
     private candSer = inject(GestionCandidatsService);
     
     ngOnInit() {
-       this.candidateToUpdate = this.candSer.getCandidatById(this.actRoute.snapshot.paramMap.get("id"))
+        this.candSer.getCandidatByIdAPI(this.actRoute.snapshot.paramMap.get("id")).subscribe(
+            {
+                next : (response : Candidat) => {
+                    this.candidateToUpdate = response;
+                }
+            }
+        )
         
     }
     
     submitHandler(formValue) {
-        formValue.id = this.candidateToUpdate.id;
-        this.candSer.updateCandidat(formValue);
-        this.router.navigateByUrl("/cv")
+        formValue._id = this.candidateToUpdate._id;
+        this.candSer.updateCandidatAPI(formValue).subscribe(
+            {
+                next : (response) => {
+                    alert(response["message"]);
+                    this.router.navigateByUrl("/cv")
+                },
+                error : (err) => {
+                    alert("Impossible de mettre à jour ce candidat...")
+                }
+            }
+        )
     }
 
 }

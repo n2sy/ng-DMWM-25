@@ -19,7 +19,16 @@ export class InfosComponent {
     ngOnInit() {
         //1ere manière
         // console.log(this.activatedRoute.snapshot.params);
-        this.selectedCand = this.candSer.getCandidatById(this.activatedRoute.snapshot.paramMap.get('id'));
+        this.candSer.getCandidatByIdAPI(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
+            {
+                next : (response : Candidat) => {
+                    this.selectedCand = response;
+                },
+                error : (err) => {
+                    this.router.navigateByUrl("/not-found")
+                }
+            }
+        )
         
         //2eme manière
         // this.activatedRoute.paramMap.subscribe(
@@ -35,8 +44,17 @@ export class InfosComponent {
     }
     deleteHandler() {
         if(confirm("Etes vous sur de vouloir supprimer ce candidat ?")) {
-            this.candSer.deleteCandidat(this.selectedCand.id);
-            this.router.navigateByUrl("/cv")
+            this.candSer.deleteCandidatAPI(this.selectedCand._id).subscribe(
+                {
+                    next : (response) => {
+                        alert(response["message"]);
+                        this.router.navigateByUrl("/cv")
+                    },
+                    error : (err) => {
+                        alert("Vous n'avez pas les droits nécessaires pour supprimer ce candidat")
+                    }
+                }
+            )
         }
     }
 

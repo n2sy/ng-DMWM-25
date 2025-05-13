@@ -1,6 +1,11 @@
+@if (showError) {
+    <div class="alert alert-danger">Login et/ou mot de passe invalide(s)</div>  
+    
+}
+
 <form #f="ngForm">
     <label for="">Login</label>
-    <input #inpLogin="ngModel" ngModel required email name="login" type="text" class="form-control">
+    <input #inpLogin="ngModel" ngModel required email name="email" type="text" class="form-control">
     @if (inpLogin.invalid && inpLogin.touched) {
         <div class="alert alert-danger">Veuillez saisir une adresse mail</div>  
     }
@@ -12,9 +17,9 @@
         <div class="alert alert-danger">Le nombre minimal de caractères est 6</div>
     }
     
-    <label for="">Gestion d'erreurs</label>
-    <input #exp="ngModel" type="text" ngModel name="errors" class="form-control" required minlength="5" pattern="nidhal">
-    
+    <!-- <label for="">Gestion d'erreurs</label>
+    <input #exp="ngModel" type="text" ngModel name="errors" class="form-control" required minlength="5" pattern="nidhal"> -->
+<!--     
     @if (exp.invalid) {
         @if (exp.errors["required"]) {
             <div class="alert alert-info">Ce champ est obligatoire</div>
@@ -25,9 +30,9 @@
         @if (exp.errors["pattern"]) {
             <div class="alert alert-info">Le pattern est 'nidhal'</div>
         }
-    }
+    } -->
     
-    
+<!--     
     <div #divInfos="ngModelGroup" ngModelGroup="infos">
         <label for="">Langage préféré</label>
         <select name="langage"  [ngModel]="defaultLanguage" class="form-control">
@@ -44,11 +49,24 @@
         <hr>
         {{ myComment}}
         <hr>
+    </div> -->
+    <br>
+    <div class="col-4 offset-4">
+        @if (showRegister) {
+            <button [disabled]="f.invalid" (click)="submitHandler(f)" class="btn btn-primary">Register</button>
+            <button (click)="toggleShowRegister()" class="btn btn-warning">Switch To Login</button>
+            
+        }
+        @else {
+            
+            <button [disabled]="f.invalid" (click)="submitHandler(f)" class="btn btn-info">Login</button>
+            <button (click)="toggleShowRegister()" class="btn btn-danger">Switch To Register</button>
+        }
+        
     </div>
-    
-    <button [disabled]="f.invalid" (click)="submitHandler(f)" class="btn btn-primary">Se connecter</button>
-    <button (click)="reinitialiserForm(f)" class="btn btn-danger">Reinitialiser</button>
-    <button (click)="genererPwd(f)" class="btn btn-info">Generer Mot de passe</button>
+  
+    <!-- <button (click)="reinitialiserForm(f)" class="btn btn-danger">Reinitialiser</button>
+    <button (click)="genererPwd(f)" class="btn btn-info">Generer Mot de passe</button> -->
     
     <pre>
         {{ f.value | json }}

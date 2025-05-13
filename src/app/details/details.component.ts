@@ -15,6 +15,11 @@ export class DetailsComponent {
    @Input() selCandidat : Candidat;
    private recrueSer = inject(GestionRecruesService);
    
+   ngOnInit() {
+    console.log(this.selCandidat);
+    
+   }
+   
    onRecruter() {
         this.recrueSer.addRecrue(this.selCandidat);
    }
